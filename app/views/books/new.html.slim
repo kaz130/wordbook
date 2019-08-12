@@ -1,2 +1,13 @@
-h1 Books#new
-p Find me in app/views/books/new.html.slim
+h1 単語帳の作成
+
+.nav.justify-content-end
+  = link_to Book.human_attribute_name(:list), books_path, class: 'nav-link'
+
+= form_with model: @book, local: true do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control', id: 'book_name'
+  .form-group
+    = f.label :description
+    = f.text_area :description, rows: 5, class: 'form-control', id: 'book_description'
+  = f.submit nil, class: 'btn btn-primary'
