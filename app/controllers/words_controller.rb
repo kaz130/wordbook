@@ -6,6 +6,12 @@ class WordsController < ApplicationController
     end
   end
 
+  def destroy
+    @word = Word.find(params[:id])
+    @word.destroy
+    redirect_to controller: 'books', action: 'show', id: @word.book_id
+  end
+
   private
 
   def word_params
