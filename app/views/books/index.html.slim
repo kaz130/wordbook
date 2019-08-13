@@ -1,3 +1,17 @@
 h1 = Book.model_name.human
 
 = link_to Book.human_attribute_name(:new_book), new_book_path, class: 'btn btn-primary'
+
+.mb-3
+table.table.table-hover
+  thead.thead-default
+    tr
+      th= Book.human_attribute_name(:name)
+      th= Book.human_attribute_name(:description)
+      th
+  tbody
+    - @books.each do |book|
+      tr
+        td= link_to book.name, book
+        td= book.description
+        td= link_to Book.human_attribute_name(:delete), book, method: :delete, data: { confirm: Book.human_attribute_name(:delete_confirm, book: book.name) } , class: 'btn btn-danger'
