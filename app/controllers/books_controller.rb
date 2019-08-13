@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :destroy]
-  before_action :set_words, only: [:show]
+  before_action :set_words, only: [:show, :destroy]
 
   def index
     @books = current_user.books.all
@@ -26,6 +26,9 @@ class BooksController < ApplicationController
   end
 
   def destroy
+    @words.each do |word|
+      word.destroy
+    end
     @book.destroy
     redirect_to books_url, notice: "単語帳「#{@book.name}」を削除しました．"
   end
