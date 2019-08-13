@@ -15,10 +15,16 @@ table.table.table-hover
     tr
       th= Word.human_attribute_name(:name)
       th= Word.human_attribute_name(:description)
-      / th
+      th
     tbody
       - @words.each do |word|
         tr
           td= word.name
           td= word.description
-          / td= link_to Word.human_attribute_name(:delete), nil, method: :delete, data: { confirm: Word.human_attribute_name(:delete_confirm, word: word.name) }, class: 'btn btn-danger'
+          td= link_to Word.human_attribute_name(:delete), nil, method: :delete, data: { confirm: Word.human_attribute_name(:delete_confirm, word: word.name) }, class: 'btn btn-danger'
+      tr
+        = form_with model: @new_word, local: true do |f|
+          td= f.text_field :name, class: 'form-control', id: 'word_name'
+          td= f.text_field :description, rows: 3, class: 'form-control', id: 'word_description'
+          = f.hidden_field :book_id, value: @book.id
+          td= f.submit Word.human_attribute_name(:add), class: 'btn btn-primary'

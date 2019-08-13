@@ -7,6 +7,7 @@ class BooksController < ApplicationController
   end
 
   def show
+    @new_word = Word.new
   end
 
   def new
