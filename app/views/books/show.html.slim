@@ -1,2 +1,24 @@
-h1 Books#show
-p Find me in app/views/books/show.html.slim
+h1 = Book.human_attribute_name(:word_list)
+
+table.table.table-hover
+  tbody
+    tr
+      th= Book.human_attribute_name(:name)
+      td= @book.name
+    tr
+      th= Book.human_attribute_name(:description)
+      td= simple_format(h(@book.description), {}, sanitize: false, wrapper_tag: "div")
+
+.mb-3
+table.table.table-hover
+  thead.thead-default
+    tr
+      th= Word.human_attribute_name(:name)
+      th= Word.human_attribute_name(:description)
+      / th
+    tbody
+      - @words.each do |word|
+        tr
+          td= word.name
+          td= word.description
+          / td= link_to Word.human_attribute_name(:delete), nil, method: :delete, data: { confirm: Word.human_attribute_name(:delete_confirm, word: word.name) }, class: 'btn btn-danger'

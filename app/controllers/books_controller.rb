@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :destroy]
+  before_action :set_words, only: [:show]
 
   def index
     @books = current_user.books.all
@@ -37,5 +38,9 @@ class BooksController < ApplicationController
 
   def set_book
     @book = current_user.books.find(params[:id])
+  end
+
+  def set_words
+    @words = current_user.books.find(params[:id]).words
   end
 end
